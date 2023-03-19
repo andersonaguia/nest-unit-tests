@@ -16,10 +16,13 @@ export class CityController {
 
   @Get(':id')
   async getById(@Param('id') id: number): Promise<CityEntity> {
-    return await this.cityService.findById(id);
+    return await this.cityService.findById(+id);
   }
 
   @Delete(':id')
+  async removeById(@Param('id') id: number): Promise<string> {
+    return await this.cityService.removeById(+id);
+  }
 
   @Post('createAllCities')
   async createAllCities(): Promise<string> {

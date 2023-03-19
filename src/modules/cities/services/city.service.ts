@@ -16,6 +16,26 @@ export class CityService {
     return foundCity;
   }
 
+  async removeById(id: number): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const cityExists = await this.findById(id);
+
+        if (!cityExists) {
+          throw new NotFoundException('Cidade não encontrada');
+        }
+
+        const cityRemoved = await this.cityRepository.delete({ id: id });
+
+        if (cityRemoved.affected > 0) {
+          resolve('Excluído com sucesso!');
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   async createCity(newCity: CreateCityDto): Promise<void> {
     await this.cityRepository.createCity(newCity);
   }
