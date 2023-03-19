@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param } from '@nestjs/common';
+import { Controller, Post, Get, Param, Delete } from '@nestjs/common';
 import { StateService } from '../../states/services/state.service';
 import { CityService } from '../services/city.service';
 import axios from 'axios';
@@ -18,6 +18,8 @@ export class CityController {
   async getById(@Param('id') id: number): Promise<CityEntity> {
     return await this.cityService.findById(id);
   }
+
+  @Delete(':id')
 
   @Post('createAllCities')
   async createAllCities(): Promise<string> {
