@@ -1,10 +1,19 @@
-import { Controller, Post, Get, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  Delete,
+  Patch,
+  Body,
+} from '@nestjs/common';
 import { StateService } from '../../states/services/state.service';
 import { CityService } from '../services/city.service';
 import axios from 'axios';
 import { City } from '../interfaces';
 import { ApiTags } from '@nestjs/swagger';
 import { CityEntity } from '../entities/city.entity';
+import { UpdateCityDto } from '../dto/update-city.dto';
 
 @ApiTags('cities')
 @Controller('city')
@@ -22,6 +31,14 @@ export class CityController {
   @Delete(':id')
   async removeById(@Param('id') id: number): Promise<string> {
     return await this.cityService.removeById(+id);
+  }
+
+  @Patch(':id')
+  async updateById(
+    @Param('id') id: number,
+    @Body() data: UpdateCityDto,
+  ): Promise<string> {
+    return await this.cityService.updateById(+id, data);
   }
 
   @Post('createAllCities')
