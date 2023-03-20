@@ -15,6 +15,10 @@ export class StateService {
     return await this.stateRepository.getByAll();
   }
 
+  async getById(stateId: number): Promise<StateEntity> {
+    return await this.stateRepository.findOne({ where: { id: stateId } });
+  }
+
   async createState(newState: CreateStateDto): Promise<void> {
     await this.stateRepository.createState(newState);
   }

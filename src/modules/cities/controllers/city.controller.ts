@@ -14,6 +14,7 @@ import { City } from '../interfaces';
 import { ApiTags } from '@nestjs/swagger';
 import { CityEntity } from '../entities/city.entity';
 import { UpdateCityDto } from '../dto/update-city.dto';
+import { CreateCityDto } from '../dto/create-city.dto';
 
 @ApiTags('cities')
 @Controller('city')
@@ -26,6 +27,11 @@ export class CityController {
   @Get(':id')
   async getById(@Param('id') id: number): Promise<CityEntity> {
     return await this.cityService.findById(+id);
+  }
+
+  @Post('create')
+  async createCity(@Body() newCity: CreateCityDto): Promise<CityEntity> {
+    return await this.cityService.createCity(newCity);
   }
 
   @Delete(':id')

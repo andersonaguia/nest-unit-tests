@@ -1,11 +1,12 @@
 import { IsNotEmpty, IsString } from '@nestjs/class-validator';
+import { IsNumber } from 'class-validator';
 
 export class CreateCityDto {
-  @IsString()
   @IsNotEmpty()
-  public name: string;
+  @IsString()
+  readonly name: string;
 
-  @IsString()
   @IsNotEmpty()
-  public state_id: number;
+  @IsNumber()
+  readonly state_id: number;
 }
