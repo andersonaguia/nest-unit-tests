@@ -18,6 +18,7 @@ export class CityService {
 
   async findById(id: number): Promise<CityEntity> {
     const foundCity = await this.cityRepository.getById(id);
+
     if (!foundCity) {
       throw new NotFoundException('cityNotFound');
     }
